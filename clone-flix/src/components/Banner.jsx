@@ -10,6 +10,7 @@ const Banner = () => {
 
   return (
     <div className="w-full relative top-0">
+      <h1 className="text-center text-white font-bold text-3xl pb-5">Découvrez un univers de divertissement illimité : Films, séries TV, et plus encore chez <span className="font-extrabold text-red-700">CloneFlix</span> !</h1>
       <AutoPlaySwipeableViews>
         {popularMovies.map((movie) => (
           <div key={movie.id} className="w-full">

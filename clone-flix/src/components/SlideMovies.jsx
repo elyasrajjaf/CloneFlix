@@ -3,8 +3,8 @@ import useMovies from "../hooks/useMovies";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import { MovieCard } from "../components/MovieCard";
-import './Slider.css';
-import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import "./Slider.css";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -35,43 +35,89 @@ const SlideMovies = (props) => {
 
   return (
     <>
-      <h1 className="text-white text-2xl mb-4">Les Films en Tendances:</h1>
+      <h1 className="text-white text-2xl pl-10 py-5 mb-4">Les Films en Tendances:</h1>
 
       <div id="main-slider-container">
-        <MdChevronLeft size={40} className="slider-icon left" onClick={slideLeft} />
+        <MdChevronLeft
+          size={40}
+          className="slider-icon left"
+          onClick={slideLeft}
+        />
         <div id="slider">
           {trendingMovies.map((movieTrend) => (
             <div className="slider-card">
-              <div className="w-full">
-                <MovieCard key={movieTrend.id} movieTrend={movieTrend} />
-              </div>
+              <MovieCard key={movieTrend.id} movieTrend={movieTrend} />
             </div>
           ))}
         </div>
-        <MdChevronRight size={40} className="slider-icon right" onClick={slideRight} />
+        <MdChevronRight
+          size={40}
+          className="slider-icon right"
+          onClick={slideRight}
+        />
       </div>
 
-
-      <h1 className="text-white text-2xl mb-4">Les Séries en Tendances:</h1>
-      <div className="flex justify-start flex-wrap mb-4 gap-10 w-full">
-        {randomSeries.map((serieTrend) => (
-
-          <MovieCard key={serieTrend.id} movieTrend={serieTrend} />
-        ))}
+      <h1 className="text-white text-2xl pl-10 mb-4 py-5">Les Séries en Tendances:</h1>
+      <div id="main-slider-container">
+        <MdChevronLeft
+          size={40}
+          className="slider-icon left"
+          onClick={slideLeft}
+        />
+        <div id="slider">
+          {randomSeries.map((serieTrend) => (
+            <div className="slider-card">
+              <MovieCard key={serieTrend.id} movieTrend={serieTrend} />
+            </div>
+          ))}
+        </div>
+        <MdChevronRight
+          size={40}
+          className="slider-icon right"
+          onClick={slideRight}
+        />
       </div>
 
-      <h1 className="text-white text-2xl mb-4">Les Films populaires:</h1>
-      <div className="flex justify-start flex-wrap mb-4 gap-10 w-full">
-        {randomPopularMovies.map((popularMovies) => (
-          <MovieCard key={popularMovies.id} movieTrend={popularMovies} />
-        ))}
+      <h1 className="text-white text-2xl pl-10 mb-4 py-5">Les Films populaires:</h1>
+      <div id="main-slider-container">
+        <MdChevronLeft
+          size={40}
+          className="slider-icon left"
+          onClick={slideLeft}
+        />
+        <div id="slider">
+          {randomPopularMovies.map((popularMovies) => (
+            <div className="slider-card">
+              <MovieCard key={popularMovies.id} movieTrend={popularMovies} />
+            </div>
+          ))}
+        </div>
+        <MdChevronRight
+          size={40}
+          className="slider-icon right"
+          onClick={slideRight}
+        />
       </div>
 
-      <h1 className="text-white text-2xl mb-4">La Saga Star Wars:</h1>
-      <div className="flex justify-start flex-wrap mb-4 gap-10 w-full">
-        {swCollectionMovies.map(part => (
-          <MovieCard key={part.id} movieTrend={part} />
-        ))}
+      <h1 className="text-white text-2xl pl-10 mb-4 py-5">La Saga Star Wars:</h1>
+      <div id="main-slider-container">
+        <MdChevronLeft
+          size={40}
+          className="slider-icon left"
+          onClick={slideLeft}
+        />
+        <div id="slider">
+          {swCollectionMovies.map((part) => (
+            <div className="slider-card">
+              <MovieCard key={part.id} movieTrend={part} />
+            </div>
+          ))}
+        </div>
+        <MdChevronRight
+          size={40}
+          className="slider-icon right"
+          onClick={slideRight}
+        />
       </div>
     </>
   );

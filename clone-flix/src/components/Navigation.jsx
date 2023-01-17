@@ -2,10 +2,11 @@ import { NavLink } from "react-router-dom";
 
 export const Navigation = () => {
   return (
-    <div className="w-full h-screen px-5 py-20 bg-gray-800 sticky top-0">
-      <div className="max-h-screen flex items-center justify-center bg-slate-800 py-20 ">
+    <div className="w-full h-screen px-5 pb-20 bg-gray-800 sticky top-0">
+      <div className="max-h-screen flex items-center justify-center bg-slate-800 pb-20 ">
         <div className="flex w-full max-w-xs p-4 bg-gray-800">
           <ul className="flex flex-col w-full">
+            <span className="text-center m-5 font-bold text-2xl text-red-700">CLONEFLIX</span>
             <li className="my-px">
               <a
                 href="#"
