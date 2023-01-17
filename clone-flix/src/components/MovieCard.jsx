@@ -10,7 +10,7 @@ export const MovieCard = ({ movieTrend }) => {
           <div className="h-auto p-3 flex items-center justify-start">
             <img
               className="rounded-3xl shadow-lg w-1/1"
-              src={ backdrop_path ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${backdrop_path}` : "Pas d'image"}
+              src={backdrop_path ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${backdrop_path}` : "Pas d'image"}
               alt=""
             />
           </div>

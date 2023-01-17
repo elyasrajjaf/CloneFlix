@@ -3,10 +3,12 @@ import useMovies from "../hooks/useMovies";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import { MovieCard } from "../components/MovieCard";
+import './Slider.css';
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-const SlideMovies = () => {
+const SlideMovies = (props) => {
   const { trendingMovies, trendingSeries, popularMovies, swCollection } =
     useMovies();
 
@@ -19,21 +21,41 @@ const SlideMovies = () => {
     .sort(() => 0.5 - Math.random())
     .slice(0, 5);
 
+  const slides = [];
+
+  const slideLeft = () => {
+    let slider = document.getElementById("slider");
+    slider.scrollLeft = slider.scrollLeft - 500;
+  };
+
+  const slideRight = () => {
+    let slider = document.getElementById("slider");
+    slider.scrollLeft = slider.scrollLeft + 500;
+  };
+
   return (
     <>
       <h1 className="text-white text-2xl mb-4">Les Films en Tendances:</h1>
 
-      <AutoPlaySwipeableViews>
-        {trendingMovies.map((movieTrend) => (
-          <div className="grid-cols-4 justify-start mb-4 gap-4">
-            <MovieCard key={movieTrend.id} movieTrend={movieTrend} />
-          </div>
-        ))}
-      </AutoPlaySwipeableViews>
+      <div id="main-slider-container">
+        <MdChevronLeft size={40} className="slider-icon left" onClick={slideLeft} />
+        <div id="slider">
+          {trendingMovies.map((movieTrend) => (
+            <div className="slider-card">
+              <div className="w-full">
+                <MovieCard key={movieTrend.id} movieTrend={movieTrend} />
+              </div>
+            </div>
+          ))}
+        </div>
+        <MdChevronRight size={40} className="slider-icon right" onClick={slideRight} />
+      </div>
+
 
       <h1 className="text-white text-2xl mb-4">Les Séries en Tendances:</h1>
       <div className="flex justify-start flex-wrap mb-4 gap-10 w-full">
         {randomSeries.map((serieTrend) => (
+
           <MovieCard key={serieTrend.id} movieTrend={serieTrend} />
         ))}
       </div>
@@ -56,3 +78,10 @@ const SlideMovies = () => {
 };
 
 export default SlideMovies;
+// <AutoPlaySwipeableViews>
+//   {trendingMovies.map((movieTrend) => (
+//     <div className="grid-cols-4 justify-start mb-4 gap-4">
+//       <MovieCard key={movieTrend.id} movieTrend={movieTrend} />
+//     </div>
+//   ))}
+// </AutoPlaySwipeableViews>;
