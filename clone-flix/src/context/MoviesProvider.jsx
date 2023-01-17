@@ -6,7 +6,10 @@ const MoviesContext = createContext();
 const MoviesProvider = ({children}) => {
     const [trendingMovies, setTrendingMovies] = useState([]);
     const [trendingSeries, setTrendingSeries] = useState([]);
-    const [latestMovies, setLatestMovies] = useState([]);
+    const [popularMovies, setPopularMovies] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [swCollection, setSwCollection] = useState([]);
+    
 
     useEffect(() => {
       const trendingApi = async () => {
@@ -20,33 +23,71 @@ const MoviesProvider = ({children}) => {
     }, [])
 
     useEffect(() => {
-        const trendingApi = async () => {
+        const trendingSerie = async () => {
             const url = `https://api.themoviedb.org/3/trending/tv/week?api_key=a75e7e403b10ac94ebb9251b44696249`;
 
             const { data } = await axios(url);
 
             setTrendingSeries(data.results);
         };
-        trendingApi();
+        trendingSerie();
     }, [])
 
     useEffect(() => {
-        const trendingApi = async () => {
-            const url = `https://api.themoviedb.org/3/movie/latest?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US`
+        const popularMoviesAPI = async () => {
+            const url = 'https://api.themoviedb.org/3/movie/popular?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US&page=';
+            let popularMovies = [];
+            for(let p = 1; p < 21; p++)
+            {
+                let { data } = await axios(url + p);
+                data.results.forEach( movie => popularMovies.push(movie) );
+            }
+            setPopularMovies(popularMovies);
+        };
+        popularMoviesAPI();
+    }, [])
+
+    useEffect(() => {
+        const categoriesAPI = async () => {
+          const url = `https://api.themoviedb.org/3/trending/genre/movie/list?api_key=a75e7e403b10ac94ebb9251b44696249`;
+    
+          const { data } = await axios(url);
+    
+          setCategories(data.results);
+        };
+        categoriesAPI();
+      }, [])
+
+    useEffect(() => {
+        const swCollectionAPI = async () => {
+            const url = `https://api.themoviedb.org/3/collection/10?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US`;
 
             const { data } = await axios(url);
 
-            setLatestMovies(data.results);
+            setSwCollection(data.parts);
         };
-        trendingApi();
+        swCollectionAPI();
     }, [])
+
+
+
+//     let moviesByCat = [];
+
+//     categories.forEach( (cat) => {
+//     moviesByCat.push({
+//         category: cat.name,
+//         movies: popularMovies.filter( movie => movie.genre === cat.id )
+//     });
+//     })
 
     return(
         <MoviesContext.Provider
             value={{
                 trendingMovies,
                 trendingSeries,
-                latestMovies
+                popularMovies,
+                swCollection,
+                categories,
             }}
         >
             {children}

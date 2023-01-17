@@ -38,6 +38,7 @@ const Movie = () => {
             
     }, [])
 
+    // isLoaded -> wait for movie infos   is favorite or not before render
     */
     return (
         <div></div>
