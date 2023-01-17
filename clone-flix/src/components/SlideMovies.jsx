@@ -12,15 +12,6 @@ const SlideMovies = (props) => {
   const { trendingMovies, trendingSeries, popularMovies, swCollection } =
     useMovies();
 
-  // let randomMovies = trendingMovies.sort(() => 0.5 - Math.random()).slice(0, 4);
-  let randomSeries = trendingSeries.sort(() => 0.5 - Math.random()).slice(0, 5);
-  let randomPopularMovies = popularMovies
-    .sort(() => 0.5 - Math.random())
-    .slice(0, 5);
-  let swCollectionMovies = swCollection
-    .sort(() => 0.5 - Math.random())
-    .slice(0, 5);
-
   const slides = [];
 
   const slideLeft = () => {
@@ -65,7 +56,7 @@ const SlideMovies = (props) => {
           onClick={slideLeft}
         />
         <div id="slider">
-          {randomSeries.map((serieTrend) => (
+          {trendingSeries.map((serieTrend) => (
             <div className="slider-card">
               <MovieCard key={serieTrend.id} movieTrend={serieTrend} />
             </div>
@@ -86,7 +77,7 @@ const SlideMovies = (props) => {
           onClick={slideLeft}
         />
         <div id="slider">
-          {randomPopularMovies.map((popularMovies) => (
+          {popularMovies.map((popularMovies) => (
             <div className="slider-card">
               <MovieCard key={popularMovies.id} movieTrend={popularMovies} />
             </div>
@@ -107,7 +98,7 @@ const SlideMovies = (props) => {
           onClick={slideLeft}
         />
         <div id="slider">
-          {swCollectionMovies.map((part) => (
+          {swCollection.map((part) => (
             <div className="slider-card">
               <MovieCard key={part.id} movieTrend={part} />
             </div>

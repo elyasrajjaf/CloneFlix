@@ -5,7 +5,7 @@ export const Navigation = () => {
     <div className="w-full h-screen px-5 pb-20 bg-gray-800 sticky top-0">
       <div className="max-h-screen flex items-center justify-center bg-slate-800 pb-20 ">
         <div className="flex w-full max-w-xs p-4 bg-gray-800">
-          <ul className="flex flex-col w-full">
+          <ul className="flex flex-col w-full gap-5">
             <span className="text-center m-5 font-bold text-2xl text-red-700">CLONEFLIX</span>
             <li className="my-px">
               <a
