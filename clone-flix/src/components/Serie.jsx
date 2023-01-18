@@ -1,20 +1,19 @@
 import { Navigate, NavLink, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { addFavoriteMovie, deleteFavoriteMovie } from "../actions/favoriteActions";
+import { addFavoriteSerie, deleteFavoriteSerie } from "../actions/favoriteActions";
 import axios from "axios";
 
-const Movie = () => {
+const Serie = () => {
 
     const favoris = localStorage.getItem('favoris');
 
     const dispatch = useDispatch();
     const { id } = useParams();
-
-    const [movie, setMovie] = useState({});
+    const [serie, setSerie] = useState({});
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const [movieIsFavorite, setMovieIsFavorite] = useState(false);
+    const [serieIsFavorite, setSerieIsFavorite] = useState(false);
 
     // const checkIfFavorite = (movieId) => {
     //     favoris.some(movie => movie.id === movieId) ? setMovieIsFavorite(true) : setMovieIsFavorite(false);
@@ -22,18 +21,18 @@ const Movie = () => {
 
     useEffect(() => {
 
-        const getMovie = async (movieId) => {
+        const getSerie = async (serieId) => {
 
-            const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=a75e7e403b10ac94ebb9251b44696249`;
+            const url = `https://api.themoviedb.org/3/tv/${serieId}?api_key=a75e7e403b10ac94ebb9251b44696249`;
             const { data } = await axios(url);
-
-            setMovie(data);
+            console.log(data);
+            setSerie(data);
             // checkIfFavorite(movieId);
             setIsLoaded(true);
 
         };
 
-        getMovie(id);
+        getSerie(id);
 
     }, []);
 
@@ -59,27 +58,25 @@ const Movie = () => {
 
                 </div>
 
-                <h2>{movie.title ? movie.title : movie.original_title}</h2>
+                <h2>{serie.title ? serie.title : serie.original_title}</h2>
 
                 <div className="infos">
-                    <small>{movie.release_date}</small>
+                    <small>{serie.release_date}</small>
                 </div>
 
                 <img
-                    src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.backdrop_path}`}
-                    alt={movie.original_title}
+                    src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${serie.backdrop_path}`}
+                    alt={serie.original_title}
                 />
                 <p>
-                    {movie.overview}
-                </p>
-                <p>
+                    {serie.overview}
                 </p>
             </div>
 
             :
 
-            <p>Loading movie informations...</p>
+            <p>Loading tv show informations...</p>
     );
 };
 
-export default Movie;
+export default Serie;

@@ -70,7 +70,7 @@ export const Navigation = () => {
                   </svg>
                 </span>
                 <span className="ml-3 flex font-medium text-m text-gray-400 uppercase">
-                  <NavLink to={"/series"}>Séries</NavLink>
+                  <NavLink to={"/Series"}>Séries</NavLink>
                 </span>
                 <span className="flex items-center justify-center text-sm text-gray-500 font-semibold bg-gray-300 h-6 px-2 rounded-full ml-auto">
                   362
@@ -95,7 +95,7 @@ export const Navigation = () => {
                   </svg>
                 </span>
                 <span className="ml-3 flex font-medium text-m text-gray-400 uppercase">
-                  <NavLink to={"/films"}>Films</NavLink>
+                  <NavLink to={"/Movies"}>Films</NavLink>
                 </span>
                 <span className="flex items-center justify-center text-sm text-gray-500 font-semibold bg-gray-300 h-6 px-2 rounded-full ml-auto">
                   560
@@ -121,7 +121,7 @@ export const Navigation = () => {
                   </svg>
                 </span>
                 <span className="ml-3 flex font-medium text-m text-gray-400 uppercase">
-                  <NavLink to={"/categories"}>Catégories</NavLink>
+                  <NavLink to={"/Collections"}>Collections</NavLink>
                 </span>
               </p>
             </li>
@@ -144,7 +144,7 @@ export const Navigation = () => {
                   </svg>
                 </span>
                 <span className="ml-4 flex font-medium text-m text-gray-400 uppercase">
-                  <NavLink to={"/favoris"}>Favoris</NavLink>
+                  <NavLink to={"/Favoris"}>Favoris</NavLink>
                 </span>
                 <span className="flex items-center justify-center text-sm text-gray-500 font-semibold bg-gray-300 h-6 px-2 rounded-full ml-auto">
                   0

@@ -3,25 +3,43 @@ import axios from "axios";
 
 const MoviesContext = createContext();
 
-const MoviesProvider = ({children}) => {
-    const [trendingMovies, setTrendingMovies] = useState([]);
-    const [trendingSeries, setTrendingSeries] = useState([]);
+const MoviesProvider = ({ children }) => {
+    // Films 
     const [popularMovies, setPopularMovies] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [swCollection, setSwCollection] = useState([]);
-    
+    const [trendingMovies, setTrendingMovies] = useState([]);
 
+    // Populaires
     useEffect(() => {
-      const trendingApi = async () => {
-        const url = `https://api.themoviedb.org/3/trending/movie/week?api_key=a75e7e403b10ac94ebb9251b44696249`;
-  
-        const { data } = await axios(url);
-  
-        setTrendingMovies(data.results);
-      };
-      trendingApi();
-    }, [])
+        const popularMoviesAPI = async () => {
+            const url = 'https://api.themoviedb.org/3/movie/popular?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US&page=';
+            let popularMovies = [];
+            for (let p = 1; p < 21; p++) {
+                let { data } = await axios(url + p);
+                data.results.forEach(movie => popularMovies.push(movie));
+            }
+            setPopularMovies(popularMovies);
+        };
+        popularMoviesAPI();
+    }, []);
 
+    // Tendances
+    useEffect(() => {
+        const trendingApi = async () => {
+            const url = `https://api.themoviedb.org/3/trending/movie/week?api_key=a75e7e403b10ac94ebb9251b44696249`;
+
+            const { data } = await axios(url);
+
+            setTrendingMovies(data.results);
+        };
+        trendingApi();
+    }, []);
+
+    /////////////////////////////////////////////////////////////////////////////
+
+    // Series
+    const [trendingSeries, setTrendingSeries] = useState([]);
+
+    // Tendances
     useEffect(() => {
         const trendingSerie = async () => {
             const url = `https://api.themoviedb.org/3/trending/tv/week?api_key=a75e7e403b10ac94ebb9251b44696249`;
@@ -31,33 +49,14 @@ const MoviesProvider = ({children}) => {
             setTrendingSeries(data.results);
         };
         trendingSerie();
-    }, [])
+    }, []);
 
-    useEffect(() => {
-        const popularMoviesAPI = async () => {
-            const url = 'https://api.themoviedb.org/3/movie/popular?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US&page=';
-            let popularMovies = [];
-            for(let p = 1; p < 21; p++)
-            {
-                let { data } = await axios(url + p);
-                data.results.forEach( movie => popularMovies.push(movie) );
-            }
-            setPopularMovies(popularMovies);
-        };
-        popularMoviesAPI();
-    }, [])
+    /////////////////////////////////////////////////////////////////////////////
 
-    useEffect(() => {
-        const categoriesAPI = async () => {
-          const url = `https://api.themoviedb.org/3/trending/genre/movie/list?api_key=a75e7e403b10ac94ebb9251b44696249`;
-    
-          const { data } = await axios(url);
-    
-          setCategories(data.results);
-        };
-        categoriesAPI();
-      }, [])
+    // Collections
+    const [swCollection, setSwCollection] = useState([]);
 
+    // Star Wars
     useEffect(() => {
         const swCollectionAPI = async () => {
             const url = `https://api.themoviedb.org/3/collection/10?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US`;
@@ -67,36 +66,35 @@ const MoviesProvider = ({children}) => {
             setSwCollection(data.parts);
         };
         swCollectionAPI();
-    }, [])
+    }, []);
 
 
 
-//     let moviesByCat = [];
+    //     let moviesByCat = [];
 
-//     categories.forEach( (cat) => {
-//     moviesByCat.push({
-//         category: cat.name,
-//         movies: popularMovies.filter( movie => movie.genre === cat.id )
-//     });
-//     })
+    //     categories.forEach( (cat) => {
+    //     moviesByCat.push({
+    //         category: cat.name,
+    //         movies: popularMovies.filter( movie => movie.genre === cat.id )
+    //     });
+    //     })
 
-    return(
+    return (
         <MoviesContext.Provider
             value={{
                 trendingMovies,
                 trendingSeries,
                 popularMovies,
                 swCollection,
-                categories,
             }}
         >
             {children}
         </MoviesContext.Provider>
-    )
-}
+    );
+};
 
 export {
     MoviesProvider
-}
+};
 
-export default MoviesContext
+export default MoviesContext;

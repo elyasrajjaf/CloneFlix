@@ -1,40 +1,33 @@
 import React from "react";
 import useMovies from "../hooks/useMovies";
-import SwipeableViews from "react-swipeable-views";
-import { autoPlay } from "react-swipeable-views-utils";
 import { MovieCard } from "../components/MovieCard";
 import "./Slider.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+import { useRef } from "react";
 
 const SlideMovies = (props) => {
   const { trendingMovies, trendingSeries, popularMovies, swCollection } =
     useMovies();
 
-  const slides = [];
-
-  const slideLeft = () => {
-    let slider = document.getElementById("slider");
-    slider.scrollLeft = slider.scrollLeft - 500;
+  // Configuration du slider
+  const slider = useRef([]);
+  const slideLeft = (index) => {
+    slider.current[index].scrollLeft = slider.current[index].scrollLeft - 500;
   };
-
-  const slideRight = () => {
-    let slider = document.getElementById("slider");
-    slider.scrollLeft = slider.scrollLeft + 500;
+  const slideRight = (index) => {
+    slider.current[index].scrollLeft = slider.current[index].scrollLeft + 500;
   };
 
   return (
     <>
       <h1 className="text-white text-2xl pl-10 py-5 mb-4">Les Films en Tendances:</h1>
-
       <div id="main-slider-container">
         <MdChevronLeft
           size={40}
           className="slider-icon left"
-          onClick={slideLeft}
+          onClick={() => slideLeft(0)}
         />
-        <div id="slider">
+        <div id="slider" ref={(el) => (slider.current[0] = el)}>
           {trendingMovies.map((movieTrend) => (
             <div className="slider-card">
               <MovieCard key={movieTrend.id} movieTrend={movieTrend} />
@@ -44,28 +37,7 @@ const SlideMovies = (props) => {
         <MdChevronRight
           size={40}
           className="slider-icon right"
-          onClick={slideRight}
-        />
-      </div>
-
-      <h1 className="text-white text-2xl pl-10 mb-4 py-5">Les Séries en Tendances:</h1>
-      <div id="main-slider-container">
-        <MdChevronLeft
-          size={40}
-          className="slider-icon left"
-          onClick={slideLeft}
-        />
-        <div id="slider">
-          {trendingSeries.map((serieTrend) => (
-            <div className="slider-card">
-              <MovieCard key={serieTrend.id} movieTrend={serieTrend} />
-            </div>
-          ))}
-        </div>
-        <MdChevronRight
-          size={40}
-          className="slider-icon right"
-          onClick={slideRight}
+          onClick={() => slideRight(0)}
         />
       </div>
 
@@ -74,9 +46,9 @@ const SlideMovies = (props) => {
         <MdChevronLeft
           size={40}
           className="slider-icon left"
-          onClick={slideLeft}
+          onClick={() => slideLeft(1)}
         />
-        <div id="slider">
+        <div id="slider" ref={(el) => (slider.current[1] = el)}>
           {popularMovies.map((popularMovies) => (
             <div className="slider-card">
               <MovieCard key={popularMovies.id} movieTrend={popularMovies} />
@@ -86,28 +58,49 @@ const SlideMovies = (props) => {
         <MdChevronRight
           size={40}
           className="slider-icon right"
-          onClick={slideRight}
+          onClick={() => slideRight(1)}
         />
       </div>
 
-      <h1 className="text-white text-2xl pl-10 mb-4 py-5">La Saga Star Wars:</h1>
+      <h1 className="text-white text-2xl pl-10 mb-4 py-5">Les Séries en Tendances:</h1>
       <div id="main-slider-container">
         <MdChevronLeft
           size={40}
           className="slider-icon left"
-          onClick={slideLeft}
+          onClick={() => slideLeft(2)}
         />
-        <div id="slider">
-          {swCollection.map((part) => (
+        <div id="slider" ref={(el) => (slider.current[2] = el)}>
+          {trendingSeries.map((trendingSeries) => (
             <div className="slider-card">
-              <MovieCard key={part.id} movieTrend={part} />
+              <MovieCard key={trendingSeries.id} movieTrend={trendingSeries} />
             </div>
           ))}
         </div>
         <MdChevronRight
           size={40}
           className="slider-icon right"
-          onClick={slideRight}
+          onClick={() => slideRight(2)}
+        />
+      </div>
+
+      <h1 className="text-white text-2xl pl-10 mb-4 py-5">Collections:</h1>
+      <div id="main-slider-container">
+        <MdChevronLeft
+          size={40}
+          className="slider-icon left"
+          onClick={() => slideLeft(3)}
+        />
+        <div id="slider" ref={(el) => (slider.current[3] = el)}>
+          {swCollection.map((swCollection) => (
+            <div className="slider-card">
+              <MovieCard key={swCollection.id} movieTrend={swCollection} />
+            </div>
+          ))}
+        </div>
+        <MdChevronRight
+          size={40}
+          className="slider-icon right"
+          onClick={() => slideRight(3)}
         />
       </div>
     </>
@@ -115,10 +108,3 @@ const SlideMovies = (props) => {
 };
 
 export default SlideMovies;
-// <AutoPlaySwipeableViews>
-//   {trendingMovies.map((movieTrend) => (
-//     <div className="grid-cols-4 justify-start mb-4 gap-4">
-//       <MovieCard key={movieTrend.id} movieTrend={movieTrend} />
-//     </div>
-//   ))}
-// </AutoPlaySwipeableViews>;

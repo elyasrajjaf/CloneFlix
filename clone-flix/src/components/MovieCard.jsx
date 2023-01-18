@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 export const MovieCard = ({ movieTrend }) => {
-  const { title, original_name, backdrop_path } = movieTrend;
+  const { id, title, original_name, backdrop_path } = movieTrend;
 
   return (
     <div className="w-64">
@@ -16,7 +16,7 @@ export const MovieCard = ({ movieTrend }) => {
           </div>
           <div className="py-1 px-5 mx-5 bg-slate-500">
             <h2 className="text-lg font-medium text-white text-center truncate hover:text-clip">
-              {title ? title : original_name}
+              <NavLink to={`/movie/${id}/${backdrop_path}`}>{title ? title : original_name}</NavLink>
             </h2>
           </div>
         </div>
@@ -25,9 +25,6 @@ export const MovieCard = ({ movieTrend }) => {
   );
 };
 
-/*         
-  TODO: composant <Movie />
-*/
 {
   /* 
 <div>
