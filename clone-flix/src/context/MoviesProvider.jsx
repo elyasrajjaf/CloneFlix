@@ -70,14 +70,6 @@ const MoviesProvider = ({ children }) => {
 
 
 
-    //     let moviesByCat = [];
-
-    //     categories.forEach( (cat) => {
-    //     moviesByCat.push({
-    //         category: cat.name,
-    //         movies: popularMovies.filter( movie => movie.genre === cat.id )
-    //     });
-    //     })
 
     return (
         <MoviesContext.Provider
