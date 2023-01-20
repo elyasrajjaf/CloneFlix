@@ -60,57 +60,57 @@ export const SerieCard = ({ serieTrend }) => {
                                 <p 
                                 style={{
                                     width: "fit-content",
-                                    // background: "rgba(200, 0, 0, 0.7)"
-                                    background:
-                                        genre === "Action & Adventure" ?
-                                            "red"
-                                        :
-                                        genre === "Animation" ?
-                                            "purple"
-                                        :
-                                        genre === "Comedy" ?
-                                            "orange"
-                                        :
-                                        genre === "Crime" ?
-                                            "midnightblue"
-                                        :
-                                        genre === "Documentary" ?
-                                            "mediumaquamarine"
-                                        :
-                                        genre === "Drama" ?
-                                            "darkblue"
-                                        :
-                                        genre === "Family" ?
-                                            "magenta"
-                                        :
-                                        genre === "Kids" ?
-                                            "forestgreen"
-                                        :
-                                        genre === "Mystery" ?
-                                            "darkcyan"
-                                        :
-                                        genre === "News" ?
-                                        "red"
-                                        :
-                                        genre === "Reality" ?
-                                            "darkslategrey"
-                                        :
-                                        genre === "Soap" ?
-                                            "darkorchid"
-                                        :
-                                        genre === "Sci-Fi & Fantasy" ?
-                                            "royalblue"
-                                        :
-                                        genre === "Talk" ?
-                                            "mediumseagreen"
-                                        :
-                                        genre === "War & Politics" ?
-                                            "darkolivegreen"
-                                        :
-                                        genre === "Western" ?
-                                            "brown"
-                                        :
-                                            "black",
+                                    background: "rgb(100,116,139, 0.8)",
+                                    // background:
+                                    //     genre === "Action & Adventure" ?
+                                    //         "red"
+                                    //     :
+                                    //     genre === "Animation" ?
+                                    //         "purple"
+                                    //     :
+                                    //     genre === "Comedy" ?
+                                    //         "orange"
+                                    //     :
+                                    //     genre === "Crime" ?
+                                    //         "midnightblue"
+                                    //     :
+                                    //     genre === "Documentary" ?
+                                    //         "mediumaquamarine"
+                                    //     :
+                                    //     genre === "Drama" ?
+                                    //         "darkblue"
+                                    //     :
+                                    //     genre === "Family" ?
+                                    //         "magenta"
+                                    //     :
+                                    //     genre === "Kids" ?
+                                    //         "forestgreen"
+                                    //     :
+                                    //     genre === "Mystery" ?
+                                    //         "darkcyan"
+                                    //     :
+                                    //     genre === "News" ?
+                                    //     "red"
+                                    //     :
+                                    //     genre === "Reality" ?
+                                    //         "darkslategrey"
+                                    //     :
+                                    //     genre === "Soap" ?
+                                    //         "darkorchid"
+                                    //     :
+                                    //     genre === "Sci-Fi & Fantasy" ?
+                                    //         "royalblue"
+                                    //     :
+                                    //     genre === "Talk" ?
+                                    //         "mediumseagreen"
+                                    //     :
+                                    //     genre === "War & Politics" ?
+                                    //         "darkolivegreen"
+                                    //     :
+                                    //     genre === "Western" ?
+                                    //         "brown"
+                                    //     :
+                                    //         "black",
                                     color: "white",
                                     fontWeight: "bold",
                                     padding: "0.2em 1em",

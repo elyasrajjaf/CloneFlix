@@ -57,66 +57,66 @@ export const MovieCard = ({ movieTrend }) => {
                       <p 
                       style={{
                           width: "fit-content",
-                          // background: "rgba(200, 0, 0, 0.7)",
-                          background: 
-                              genre === "Action" ?
-                                  "red"
-                              :
-                              genre === "Adventure" ?
-                                  "firebrick"
-                              : 
-                              genre === "Animation" ?
-                                  "purple"
-                              :
-                              genre === "Comedy" ?
-                                  "orange"
-                              :
-                              genre === "Crime" ?
-                                  "midnightblue"
-                              :
-                              genre === "Documentary" ?
-                                  "mediumaquamarine"
-                              :
-                              genre === "Drama" ?
-                                  "darkblue"
-                              :
-                              genre === "Family" ?
-                                  "magenta"
-                              :
-                              genre === "Fantasy" ?
-                                  "darkgreen"
-                              :
-                              genre === "History" ?
-                                  "peru"
-                              :
-                              genre === "Horror" ?
-                                  "darkred"
-                              :
-                              genre === "Music" ?
-                                  "hotpink"
-                              :
-                              genre === "Mystery" ?
-                                  "darkcyan"
-                              :
-                              genre === "Romance" ?
-                                  "slateblue"
-                              :
-                              genre === "Science Fiction" ?
-                                  "royalblue"
-                              :
-                              genre === "TV Movie" ?
-                                  "mediumseagreen"
-                              :
-                              genre === "Thriller" ?
-                                  "indigo"
-                              :
-                              genre === "War" ?
-                                  "darkolivegreen"
-                              :
-                              genre === "Western" ?
-                                  "brown"
-                              :
-                                  "black",
+                          background: "rgb(100,116,139, 0.8)",
+                          // background: 
+                          //     genre === "Action" ?
+                          //         "red"
+                          //     :
+                          //     genre === "Adventure" ?
+                          //         "firebrick"
+                          //     : 
+                          //     genre === "Animation" ?
+                          //         "purple"
+                          //     :
+                          //     genre === "Comedy" ?
+                          //         "orange"
+                          //     :
+                          //     genre === "Crime" ?
+                          //         "midnightblue"
+                          //     :
+                          //     genre === "Documentary" ?
+                          //         "mediumaquamarine"
+                          //     :
+                          //     genre === "Drama" ?
+                          //         "darkblue"
+                          //     :
+                          //     genre === "Family" ?
+                          //         "magenta"
+                          //     :
+                          //     genre === "Fantasy" ?
+                          //         "darkgreen"
+                          //     :
+                          //     genre === "History" ?
+                          //         "peru"
+                          //     :
+                          //     genre === "Horror" ?
+                          //         "darkred"
+                          //     :
+                          //     genre === "Music" ?
+                          //         "hotpink"
+                          //     :
+                          //     genre === "Mystery" ?
+                          //         "darkcyan"
+                          //     :
+                          //     genre === "Romance" ?
+                          //         "slateblue"
+                          //     :
+                          //     genre === "Science Fiction" ?
+                          //         "royalblue"
+                          //     :
+                          //     genre === "TV Movie" ?
+                          //         "mediumseagreen"
+                          //     :
+                          //     genre === "Thriller" ?
+                          //         "indigo"
+                          //     :
+                          //     genre === "War" ?
+                          //         "darkolivegreen"
+                          //     :
+                          //     genre === "Western" ?
+                          //         "brown"
+                          //     :
+                          //         "black",
                           color: "white",
                           fontWeight: "bold",
                           padding: "0.2em 1em",
