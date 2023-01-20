@@ -19,6 +19,8 @@ export const Navigation = () => {
     }
   }, [query]);
 
+  console.log(resultsSearch)
+
   const dispatch = useDispatch();
   const { favorites } = useSelector((state) => state.favorisReducer);
 
@@ -60,7 +62,7 @@ export const Navigation = () => {
                       key={result.id}
                       className="flex flex-row items-center h-12 px-3 rounded-lg text-gray-600 bg-gray-300 my-2"
                     >
-                      <h2>{result.name}</h2>
+                      <NavLink to={`/movie/${result.id}` || `/serie/${result.id}`}>{result.name}</NavLink>
                     </li>
                   ))}
                 </ul>
