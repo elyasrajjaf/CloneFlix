@@ -1,6 +1,80 @@
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { setSearchSuggestions } from "../actions/searchActions";
+
+import axios from "axios";
 
 export const Navigation = () => {
+
+  // NOTE todo: image PLACEHOLDER pour <Banner /> 
+
+  const dispatch = useDispatch();
+
+  const { favorites } = useSelector(state => state.favorisReducer);
+  const { suggestions } = useSelector(state => state.searchReducer);
+
+  const [favoritesCount, setFavoritesCount] = useState(0);
+  const [queryString, setQueryString] = useState("");
+  const [searchSuggestionsFiltered, setSearchSuggestionsFiltered] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // https://api.themoviedb.org/3/search/multi?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US&include_adult=false&query=inglorious
+
+  useEffect(()=> {
+
+    if (queryString.trim() === "") {
+      return;
+    }
+    
+    const searchbarAPI = async () => {
+  
+      const url = `https://api.themoviedb.org/3/search/multi?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US&include_adult=false&query=${queryString}`;
+  
+      const { data } = await axios(url);
+  
+      // ATTENTION: seulement la première page récupérée, gestion pagination à faire éventuellement
+      dispatch(setSearchSuggestions(data.results));
+  
+    };
+
+    searchbarAPI();
+
+  }, [queryString])
+
+  useEffect(()=> {
+
+    if (suggestions.length > 0) {
+
+      let onlyMoviesAndSeries = suggestions.filter(e => e["media_type"] === "movie" || e["media_type"] === "tv").sort((a, b) => parseFloat(b.popularity) - parseFloat(a.popularity));
+
+      setSearchSuggestionsFiltered([...onlyMoviesAndSeries]);
+      
+    }
+
+  }, [suggestions])
+
+  useEffect(() => {
+
+    let totalFavorites = favorites.movies.length + favorites.series.length;
+    setFavoritesCount(totalFavorites);
+
+  }, [favorites]);
+
+  /* CONSOLE.LOG VERIF DONNEES BIEN RECUPEREES */
+  useEffect(()=> {
+
+    if (searchSuggestionsFiltered.length > 0) {
+      console.log(searchSuggestionsFiltered);
+    }
+
+  }, [searchSuggestionsFiltered])
+  /* FIN CONSOLE.LOG VERIF */
+
+  function handleChange (event) {
+    setQueryString(event.target.value);
+  }
+
   return (
     <div className="w-full h-screen px-5 pb-20 bg-gray-800 sticky top-0">
       <div className="max-h-screen flex items-center justify-center bg-slate-800 pb-20 ">
@@ -29,7 +103,60 @@ export const Navigation = () => {
                   type="search"
                   placeholder="Rechercher un film..."
                   className="p-2 bg-gray-200"
+                  value={queryString}
+                  onChange={(e) => handleChange(e)}
                 />
+                {/* AFFICHAGE SUGGESTIONS */}
+                  
+                      {/* Format des suggestions -> cliquer sur une suggestion redirige vers la page du film / de la série */}
+                      {searchSuggestionsFiltered.length > 0 &&
+                      
+                      <div style={{
+                        background: "white", 
+                        maxHeight: "15em",
+                        position: "absolute", 
+                        top: "15em", 
+                        display: "flex", 
+                        flexDirection: "column",
+                        overflow: "hidden", 
+                        overflowY: "scroll"}}>
+
+                        {searchSuggestionsFiltered.map( searchSuggestion => {
+
+                            return (
+                                <NavLink
+                                  to={  
+                                  searchSuggestion["media_type"] === "movie" ?
+                                  `/movie/${searchSuggestion.id}`
+                                  : 
+                                  `/serie/${searchSuggestion.id}`}
+                                  style={{border: "1px solid black", padding: "0.5em 1em"}}
+                                  >
+
+                                  {searchSuggestion["media_type"] === "movie" ?
+                                  "Film: "
+                                  :
+                                  "Série: "
+                                  }
+
+                                  <span>
+                                    {searchSuggestion.name ? searchSuggestion.name : searchSuggestion["original_title"]} 
+                                  </span>
+                                  <span style={{marginLeft: "2em", float: "right"}}>
+                                    {searchSuggestion["release_date"] && searchSuggestion["release_date"]}
+                                  </span>
+                                  <span style={{marginLeft: "2em", float: "right"}}>
+                                    {searchSuggestion["first_air_date"] && searchSuggestion["first_air_date"]}
+                                  </span>
+
+                                </NavLink>
+                            )
+                        })}
+
+                      </div>
+
+                      }
+                {/* END AFFICHAGE SUGGESTIONS */}
               </a>
             </li>
             <li className="my-px">
@@ -147,7 +274,7 @@ export const Navigation = () => {
                   <NavLink to={"/Favoris"}>Favoris</NavLink>
                 </span>
                 <span className="flex items-center justify-center text-sm text-gray-500 font-semibold bg-gray-300 h-6 px-2 rounded-full ml-auto">
-                  0
+                  {favoritesCount}
                 </span>
               </p>
             </li>
@@ -157,5 +284,3 @@ export const Navigation = () => {
     </div>
   );
 };
-//   </div>
-// </div>

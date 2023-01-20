@@ -1,6 +1,7 @@
 import React from "react";
 import useMovies from "../hooks/useMovies";
 import { MovieCard } from "../components/MovieCard";
+import { SerieCard } from "../components/SerieCard";
 import "./Slider.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useRef } from "react";
@@ -70,9 +71,9 @@ const SlideMovies = (props) => {
           onClick={() => slideLeft(2)}
         />
         <div id="slider" ref={(el) => (slider.current[2] = el)}>
-          {trendingSeries.map((trendingSeries) => (
+          {trendingSeries.map((trendingSerie) => (
             <div className="slider-card">
-              <MovieCard key={trendingSeries.id} movieTrend={trendingSeries} />
+              <SerieCard key={trendingSerie.id} serieTrend={trendingSerie} />
             </div>
           ))}
         </div>
