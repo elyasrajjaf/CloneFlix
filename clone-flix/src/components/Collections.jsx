@@ -1,28 +1,26 @@
 import React from "react";
 import useMovies from "../hooks/useMovies";
-import SwipeableViews from "react-swipeable-views";
-import { autoPlay } from "react-swipeable-views-utils";
 import { MovieCard } from "../components/MovieCard";
 import "./Slider.css";
-import { MdChevronLeft, MdChevronRight, MdCollections } from "react-icons/md";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { useRef } from "react";
 
-const Movies = (props) => {
-    const { trendingMovies, popularMovies } =
+const Collections = () => {
+    const { swCollection } =
         useMovies();
 
-    const slideLeft = () => {
-        let slider = document.getElementById("slider");
-        slider.scrollLeft = slider.scrollLeft - 500;
+    // Configuration du slider
+    const slider = useRef([]);
+    const slideLeft = (index) => {
+        slider.current[index].scrollLeft = slider.current[index].scrollLeft - 500;
     };
-
-    const slideRight = () => {
-        let slider = document.getElementById("slider");
-        slider.scrollLeft = slider.scrollLeft + 500;
+    const slideRight = (index) => {
+        slider.current[index].scrollLeft = slider.current[index].scrollLeft + 500;
     };
 
     return (
         <>
-            <h1 className="text-white text-2xl pl-10 py-5 mb-4">Collection :</h1>
+            <h1 className="text-white text-2xl pl-10 mb-4 py-5">Star Wars:</h1>
             <div id="main-slider-container">
                 <MdChevronLeft
                     size={40}
@@ -30,30 +28,9 @@ const Movies = (props) => {
                     onClick={slideLeft}
                 />
                 <div id="slider">
-                    {trendingMovies.map((movieTrend) => (
+                    {swCollection.map((swCollection) => (
                         <div className="slider-card">
-                            <MovieCard key={movieTrend.id} movieTrend={movieTrend} />
-                        </div>
-                    ))}
-                </div>
-                <MdChevronRight
-                    size={40}
-                    className="slider-icon right"
-                    onClick={slideRight}
-                />
-            </div>
-
-            <h1 className="text-white text-2xl pl-10 mb-4 py-5">Les Films populaires:</h1>
-            <div id="main-slider-container">
-                <MdChevronLeft
-                    size={40}
-                    className="slider-icon left"
-                    onClick={slideLeft}
-                />
-                <div id="slider">
-                    {popularMovies.map((popularMovies) => (
-                        <div className="slider-card">
-                            <MovieCard key={popularMovies.id} movieTrend={popularMovies} />
+                            <MovieCard key={swCollection.id} movieTrend={swCollection} />
                         </div>
                     ))}
                 </div>
@@ -67,4 +44,4 @@ const Movies = (props) => {
     );
 };
 
-export default Movies;
+export default Collections;

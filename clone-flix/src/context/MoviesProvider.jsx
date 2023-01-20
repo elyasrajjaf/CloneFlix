@@ -7,6 +7,8 @@ const MoviesProvider = ({ children }) => {
     // Films 
     const [popularMovies, setPopularMovies] = useState([]);
     const [trendingMovies, setTrendingMovies] = useState([]);
+    const [rateMovies, setRateMovies] = useState([]);
+    const [upcomingMovies, setUpcomingMovies] = useState([]);
 
     // Populaires
     useEffect(() => {
@@ -29,15 +31,43 @@ const MoviesProvider = ({ children }) => {
 
             const { data } = await axios(url);
 
-            setTrendingMovies(data.results);
+            setRateMovies(data.results);
         };
         trendingApi();
+    }, []);
+
+    // Mieux notés
+
+    useEffect(() => {
+        const rateMoviesAPI = async () => {
+            const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US&page=1`;
+
+            const { data } = await axios(url);
+
+            setTrendingMovies(data.results);
+        };
+        rateMoviesAPI();
+    }, []);
+
+    // Prochainement
+    useEffect(() => {
+        const upcomingMoviesAPI = async () => {
+            const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US&page=1`;
+
+            const { data } = await axios(url);
+
+            setUpcomingMovies(data.results);
+        };
+        upcomingMoviesAPI();
     }, []);
 
     /////////////////////////////////////////////////////////////////////////////
 
     // Series
     const [trendingSeries, setTrendingSeries] = useState([]);
+    const [popularSeries, setPopularSeries] = useState([]);
+    const [rateSeries, setRateSeries] = useState([]);
+    const [onTheAirSeries, setOnTheAirSeries] = useState([]);
 
     // Tendances
     useEffect(() => {
@@ -50,6 +80,46 @@ const MoviesProvider = ({ children }) => {
         };
         trendingSerie();
     }, []);
+
+    // Populaires
+
+    useEffect(() => {
+        const popularSerieAPI = async () => {
+            const url = `https://api.themoviedb.org/3/tv/popular?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US&page=1`;
+
+            const { data } = await axios(url);
+
+            setPopularSeries(data.results);
+        };
+        popularSerieAPI();
+    }, []);
+
+    // Mieux notés
+
+    useEffect(() => {
+        const rateSerieAPI = async () => {
+            const url = `https://api.themoviedb.org/3/tv/top_rated?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US&page=1`;
+
+            const { data } = await axios(url);
+
+            setRateSeries(data.results);
+        };
+        rateSerieAPI();
+    }, []);
+
+    // Dernièrement diffusés
+
+    useEffect(() => {
+        const onTheAirSeriesAPI = async () => {
+            const url = `https://api.themoviedb.org/3/tv/on_the_air?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US&page=1`;
+
+            const { data } = await axios(url);
+
+            setOnTheAirSeries(data.results);
+        };
+        onTheAirSeriesAPI();
+    }, []);
+
 
     /////////////////////////////////////////////////////////////////////////////
 
@@ -78,6 +148,11 @@ const MoviesProvider = ({ children }) => {
                 trendingSeries,
                 popularMovies,
                 swCollection,
+                rateMovies,
+                upcomingMovies,
+                popularSeries,
+                rateSeries,
+                onTheAirSeries
             }}
         >
             {children}

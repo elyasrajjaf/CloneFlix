@@ -1,25 +1,21 @@
 import React from "react";
 import useMovies from "../hooks/useMovies";
-import SwipeableViews from "react-swipeable-views";
-import { autoPlay } from "react-swipeable-views-utils";
 import { MovieCard } from "../components/MovieCard";
 import "./Slider.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+import { useRef } from "react";
 
 const Movies = (props) => {
-    const { trendingMovies, popularMovies } =
+    const { trendingMovies, popularMovies, rateMovies, upcomingMovies } =
         useMovies();
 
-    const slideLeft = () => {
-        let slider = document.getElementById("slider");
-        slider.scrollLeft = slider.scrollLeft - 500;
+    // Configuration du slider
+    const slider = useRef([]);
+    const slideLeft = (index) => {
+        slider.current[index].scrollLeft = slider.current[index].scrollLeft - 500;
     };
-
-    const slideRight = () => {
-        let slider = document.getElementById("slider");
-        slider.scrollLeft = slider.scrollLeft + 500;
+    const slideRight = (index) => {
+        slider.current[index].scrollLeft = slider.current[index].scrollLeft + 500;
     };
 
     return (
@@ -29,9 +25,9 @@ const Movies = (props) => {
                 <MdChevronLeft
                     size={40}
                     className="slider-icon left"
-                    onClick={slideLeft}
+                    onClick={() => slideLeft(0)}
                 />
-                <div id="slider">
+                <div id="slider" ref={(el) => (slider.current[0] = el)}>
                     {trendingMovies.map((movieTrend) => (
                         <div className="slider-card">
                             <MovieCard key={movieTrend.id} movieTrend={movieTrend} />
@@ -41,7 +37,7 @@ const Movies = (props) => {
                 <MdChevronRight
                     size={40}
                     className="slider-icon right"
-                    onClick={slideRight}
+                    onClick={() => slideRight(0)}
                 />
             </div>
 
@@ -50,9 +46,9 @@ const Movies = (props) => {
                 <MdChevronLeft
                     size={40}
                     className="slider-icon left"
-                    onClick={slideLeft}
+                    onClick={() => slideLeft(1)}
                 />
-                <div id="slider">
+                <div id="slider" ref={(el) => (slider.current[1] = el)}>
                     {popularMovies.map((popularMovies) => (
                         <div className="slider-card">
                             <MovieCard key={popularMovies.id} movieTrend={popularMovies} />
@@ -62,7 +58,49 @@ const Movies = (props) => {
                 <MdChevronRight
                     size={40}
                     className="slider-icon right"
-                    onClick={slideRight}
+                    onClick={() => slideRight(1)}
+                />
+            </div>
+
+            <h1 className="text-white text-2xl pl-10 mb-4 py-5">Les mieux notés:</h1>
+            <div id="main-slider-container">
+                <MdChevronLeft
+                    size={40}
+                    className="slider-icon left"
+                    onClick={() => slideLeft(2)}
+                />
+                <div id="slider" ref={(el) => (slider.current[2] = el)}>
+                    {rateMovies.map((ratesMovies) => (
+                        <div className="slider-card">
+                            <MovieCard key={ratesMovies.id} movieTrend={ratesMovies} />
+                        </div>
+                    ))}
+                </div>
+                <MdChevronRight
+                    size={40}
+                    className="slider-icon right"
+                    onClick={() => slideRight(2)}
+                />
+            </div>
+
+            <h1 className="text-white text-2xl pl-10 mb-4 py-5">Prochainement disponible:</h1>
+            <div id="main-slider-container">
+                <MdChevronLeft
+                    size={40}
+                    className="slider-icon left"
+                    onClick={() => slideLeft(3)}
+                />
+                <div id="slider" ref={(el) => (slider.current[3] = el)}>
+                    {upcomingMovies.map((upComMovies) => (
+                        <div className="slider-card">
+                            <MovieCard key={upComMovies.id} movieTrend={upComMovies} />
+                        </div>
+                    ))}
+                </div>
+                <MdChevronRight
+                    size={40}
+                    className="slider-icon right"
+                    onClick={() => slideRight(3)}
                 />
             </div>
         </>

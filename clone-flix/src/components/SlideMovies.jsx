@@ -6,7 +6,7 @@ import "./Slider.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useRef } from "react";
 
-const SlideMovies = (props) => {
+const SlideMovies = () => {
   const { trendingMovies, trendingSeries, popularMovies, swCollection } =
     useMovies();
 

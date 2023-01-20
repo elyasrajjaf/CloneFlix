@@ -14,7 +14,7 @@ const Favoris = () => {
             <h2>Vos films favoris</h2>
             {favorites.movies.length > 0 ?
 
-                <div className="fav-movies">
+                <div className="fav-movies flex">
 
                     <p>
                         Vous avez {favorites.movies.length} films favoris.

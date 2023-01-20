@@ -1,16 +1,16 @@
 import React from "react";
+import Collections from "../components/Collections";
 
 
-const Categories = () => {
+const listCollections = () => {
 
-    
-    
   return (
     <>
-        
-
+      <div className="container">
+        <Collections />
+      </div>
     </>
   );
 };
 
-export default Categories;
+export default listCollections;
