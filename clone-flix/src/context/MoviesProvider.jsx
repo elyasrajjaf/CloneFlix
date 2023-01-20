@@ -26,10 +26,10 @@ const MoviesProvider = ({ children }) => {
     popularMoviesAPI();
   }, []);
 
-  // Tendances
-  useEffect(() => {
-    const trendingApi = async () => {
-      const url = `https://api.themoviedb.org/3/trending/movie/week?api_key=a75e7e403b10ac94ebb9251b44696249`;
+    // Collections
+    const [swCollection, setSwCollection] = useState([]);
+    const [stCollection, setStCollection] = useState([]);
+    const [jbCollection, setJbCollection] = useState([]);
 
       const { data } = await axios(url);
 
@@ -40,122 +40,49 @@ const MoviesProvider = ({ children }) => {
 
   // Mieux notés
 
-  useEffect(() => {
-    const rateMoviesAPI = async () => {
-      const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US&page=1`;
+    // Star Trek
+    useEffect(() => {
+        const stCollectionAPI = async () => {
+            const url = `https://api.themoviedb.org/3/collection/115575?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US`;
 
-      const { data } = await axios(url);
+            const { data } = await axios(url);
 
-      setTrendingMovies(data.results);
-    };
-    rateMoviesAPI();
-  }, []);
+            setStCollection(data.parts);
+        };
+        stCollectionAPI();
+    }, []);
 
-  // Prochainement
-  useEffect(() => {
-    const upcomingMoviesAPI = async () => {
-      const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US&page=1`;
+    // James Bond
+    useEffect(() => {
+        const jbCollectionAPI = async () => {
+            const url = `https://api.themoviedb.org/3/collection/645?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US`;
 
-      const { data } = await axios(url);
+            const { data } = await axios(url);
 
-      setUpcomingMovies(data.results);
-    };
-    upcomingMoviesAPI();
-  }, []);
+            setJbCollection(data.parts);
+        };
+        jbCollectionAPI();
+    }, []);
 
-  /////////////////////////////////////////////////////////////////////////////
-
-  // Series
-  const [trendingSeries, setTrendingSeries] = useState([]);
-  const [popularSeries, setPopularSeries] = useState([]);
-  const [rateSeries, setRateSeries] = useState([]);
-  const [onTheAirSeries, setOnTheAirSeries] = useState([]);
-
-  // Tendances
-  useEffect(() => {
-    const trendingSerie = async () => {
-      const url = `https://api.themoviedb.org/3/trending/tv/week?api_key=a75e7e403b10ac94ebb9251b44696249`;
-
-      const { data } = await axios(url);
-
-      setTrendingSeries(data.results);
-    };
-    trendingSerie();
-  }, []);
-
-  // Populaires
-
-  useEffect(() => {
-    const popularSerieAPI = async () => {
-      const url = `https://api.themoviedb.org/3/tv/popular?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US&page=1`;
-
-      const { data } = await axios(url);
-
-      setPopularSeries(data.results);
-    };
-    popularSerieAPI();
-  }, []);
-
-  // Mieux notés
-
-  useEffect(() => {
-    const rateSerieAPI = async () => {
-      const url = `https://api.themoviedb.org/3/tv/top_rated?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US&page=1`;
-
-      const { data } = await axios(url);
-
-      setRateSeries(data.results);
-    };
-    rateSerieAPI();
-  }, []);
-
-  // Dernièrement diffusés
-
-  useEffect(() => {
-    const onTheAirSeriesAPI = async () => {
-      const url = `https://api.themoviedb.org/3/tv/on_the_air?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US&page=1`;
-
-      const { data } = await axios(url);
-
-      setOnTheAirSeries(data.results);
-    };
-    onTheAirSeriesAPI();
-  }, []);
-
-  /////////////////////////////////////////////////////////////////////////////
-
-  // Collections
-  const [swCollection, setSwCollection] = useState([]);
-
-  // Star Wars
-  useEffect(() => {
-    const swCollectionAPI = async () => {
-      const url = `https://api.themoviedb.org/3/collection/10?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US`;
-
-      const { data } = await axios(url);
-
-      setSwCollection(data.parts);
-    };
-    swCollectionAPI();
-  }, []);
-
-  return (
-    <MoviesContext.Provider
-      value={{
-        trendingMovies,
-        trendingSeries,
-        popularMovies,
-        swCollection,
-        rateMovies,
-        upcomingMovies,
-        popularSeries,
-        rateSeries,
-        onTheAirSeries
-      }}
-    >
-      {children}
-    </MoviesContext.Provider>
-  );
+    return (
+        <MoviesContext.Provider
+            value={{
+                trendingMovies,
+                trendingSeries,
+                popularMovies,
+                swCollection,
+                rateMovies,
+                upcomingMovies,
+                popularSeries,
+                rateSeries,
+                onTheAirSeries,
+                stCollection,
+                jbCollection
+            }}
+        >
+            {children}
+        </MoviesContext.Provider>
+    );
 };
 
 export { MoviesProvider };
