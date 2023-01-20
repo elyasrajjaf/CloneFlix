@@ -1,7 +1,24 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 export const Navigation = () => {
+  const [query, setQuery] = useState("");
+  const [resultsSearch, setResultsSearch] = useState([]);
+
+  useEffect(() => {
+    const searchMovies = async () => {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/search/company?api_key=a75e7e403b10ac94ebb9251b44696249&query=${query}&page=1`
+      );
+      setResultsSearch(response.data.results);
+    };
+    if (query) {
+      searchMovies();
+    }
+  }, [query]);
+
   const dispatch = useDispatch();
   const { favorites } = useSelector((state) => state.favorisReducer);
 
@@ -14,10 +31,7 @@ export const Navigation = () => {
               CLONEFLIX
             </span>
             <li className="my-px">
-              <a
-                href="#"
-                className="flex flex-row items-center h-12 px-3 rounded-lg text-gray-600 bg-gray-100"
-              >
+              <div className="flex flex-row items-center h-12 px-3 rounded-lg text-gray-600 bg-gray-100">
                 <span className="flex items-center justify-center mt-2 text-lg text-gray-500">
                   <svg
                     fill="none"
@@ -34,9 +48,25 @@ export const Navigation = () => {
                 <input
                   type="search"
                   placeholder="Rechercher un film..."
+                  onChange={(e) => setQuery(e.target.value)}
                   className="p-2 bg-transparent"
                 />
-              </a>
+                {/* {console.log(resultsSearch.map((result) => result.name))} */}
+              </div>
+              {query ? (
+                <ul>
+                  {resultsSearch.slice(0, 5).map((result) => (
+                    <li
+                      key={result.id}
+                      className="flex flex-row items-center h-12 px-3 rounded-lg text-gray-600 bg-gray-300 my-2"
+                    >
+                      <h2>{result.name}</h2>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                ""
+              )}
             </li>
             <li className="my-px">
               <NavLink to={"/"}>

@@ -10,6 +10,7 @@ const MoviesProvider = ({ children }) => {
   const [rateMovies, setRateMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
 
+
   // Populaires
   useEffect(() => {
     const popularMoviesAPI = async () => {
@@ -149,7 +150,7 @@ const MoviesProvider = ({ children }) => {
         upcomingMovies,
         popularSeries,
         rateSeries,
-        onTheAirSeries,
+        onTheAirSeries
       }}
     >
       {children}
