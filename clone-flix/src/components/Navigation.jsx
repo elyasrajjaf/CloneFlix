@@ -34,7 +34,7 @@ export const Navigation = () => {
                 <input
                   type="search"
                   placeholder="Rechercher un film..."
-                  className="p-2 bg-gray-200"
+                  className="p-2 bg-transparent"
                 />
               </a>
             </li>
@@ -61,7 +61,7 @@ export const Navigation = () => {
               </NavLink>
             </li>
             <li className="my-px">
-              <NavLink to={"/Series"}>
+              <NavLink to={"/series"}>
                 <p className="flex flex-row items-center h-12 px-4 rounded-lg text-gray-500 hover:bg-gray-700">
                   <span className="flex items-center mt-2 justify-center text-lg text-gray-500">
                     <svg
@@ -83,7 +83,7 @@ export const Navigation = () => {
               </NavLink>
             </li>
             <li className="my-px">
-              <NavLink to={"/Movies"}>
+              <NavLink to={"/movies"}>
                 <p className="flex flex-row items-center h-12 px-4 rounded-lg text-gray-500 hover:bg-gray-700">
                   <span className="flex items-center justify-center text-lg text-gray-500 mt-2">
                     <svg
@@ -105,11 +105,8 @@ export const Navigation = () => {
               </NavLink>
             </li>
             <li className="my-px">
-              <NavLink to={"/Collections"}>
-                <p
-                  href="#"
-                  className="flex flex-row items-center h-12 px-4 rounded-lg text-gray-500 hover:bg-gray-700"
-                >
+              <NavLink to={"/collections"}>
+                <p className="flex flex-row items-center h-12 px-4 rounded-lg text-gray-500 hover:bg-gray-700">
                   <span className="flex items-center justify-center text-lg text-gray-500 mt-2">
                     <svg
                       fill="none"
@@ -130,11 +127,8 @@ export const Navigation = () => {
               </NavLink>
             </li>
             <li className="my-px">
-              <NavLink to={"/Favoris"}>
-                <p
-                  href="#"
-                  className="flex flex-row items-center h-12 px-3 rounded-lg text-gray-500 hover:bg-gray-700"
-                >
+              <NavLink to={"/favoris"}>
+                <p className="flex flex-row items-center h-12 px-3 rounded-lg text-gray-500 hover:bg-gray-700">
                   <span className="flex items-center justify-center text-lg text-green-400">
                     <svg
                       fill="none"
@@ -152,7 +146,7 @@ export const Navigation = () => {
                     Favoris
                   </span>
                   <span className="flex items-center justify-center text-sm text-gray-500 font-semibold bg-gray-300 h-6 px-2 rounded-full ml-auto">
-                    {favorites.movies.length}
+                    {favorites.movies.length + favorites.series.length}
                   </span>
                 </p>
               </NavLink>

@@ -1,7 +1,6 @@
 // import { useState, useEffect, createContext } from "react";
 // import axios from "axios";
 
-
 // const CategoriesContext = createContext();
 
 // const CategoriesProvider = ({children}) => {
@@ -18,7 +17,6 @@
 //         };
 //         trendingApi();
 //     }, [])
-
 
 //     return(
 

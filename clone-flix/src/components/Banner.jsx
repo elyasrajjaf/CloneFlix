@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import useMovies from "../hooks/useMovies";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
@@ -26,18 +27,20 @@ const Banner = () => {
                 }}
               >
                 <div className="h-auto p-3 overflow-y-hidden flex-col justify-center items-center">
-                  <div className="flex justify-center items-center mb-2">
+                  <div className="flex justify-center items-center mb-2 !blur-0">
                     <h2 className="text-lg py-3 w-56 bg-slate-600/50 font-medium text-white text-center truncate hover:text-clip">
                       {movie.title ? movie.title : movie.original_name}
                     </h2>
                   </div>
-                  <div className="flex justify-center items-center">
-                    <img
-                      className="w-1/2"
-                      src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.backdrop_path}`}
-                      alt="Image Banner"
-                    />
-                  </div>
+                  <NavLink to={`/movie/${movie.id}`}>
+                    <div className="flex justify-center items-center">
+                      <img
+                        className="w-1/2"
+                        src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.backdrop_path}`}
+                        alt="Image Banner"
+                      />
+                    </div>
+                  </NavLink>
                 </div>
               </div>
             </div>

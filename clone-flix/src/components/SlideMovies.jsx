@@ -21,7 +21,9 @@ const SlideMovies = () => {
 
   return (
     <>
-      <h1 className="text-white text-2xl pl-10 py-5 mb-4">Les Films en Tendances:</h1>
+      <h1 className="text-white text-2xl pl-10 py-5 mb-4">
+        Les Films en Tendances:
+      </h1>
       <div id="main-slider-container">
         <MdChevronLeft
           size={40}
@@ -42,7 +44,9 @@ const SlideMovies = () => {
         />
       </div>
 
-      <h1 className="text-white text-2xl pl-10 mb-4 py-5">Les Films populaires:</h1>
+      <h1 className="text-white text-2xl pl-10 mb-4 py-5">
+        Les Films populaires:
+      </h1>
       <div id="main-slider-container">
         <MdChevronLeft
           size={40}
@@ -63,7 +67,9 @@ const SlideMovies = () => {
         />
       </div>
 
-      <h1 className="text-white text-2xl pl-10 mb-4 py-5">Les Séries en Tendances:</h1>
+      <h1 className="text-white text-2xl pl-10 mb-4 py-5">
+        Les Séries en Tendances:
+      </h1>
       <div id="main-slider-container">
         <MdChevronLeft
           size={40}

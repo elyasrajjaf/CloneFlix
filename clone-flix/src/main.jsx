@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.css";
-import combineReducer from "./reducers/reducer.jsx"
+import combineReducer from "./reducers/reducer.jsx";
 
 import { Layout } from "./components/Layout";
 
@@ -18,11 +18,11 @@ export const store = configureStore({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-        <Provider store={store}>
-          <Layout>
-            <App />
-          </Layout>
-        </Provider>
+      <Provider store={store}>
+        <Layout>
+          <App />
+        </Layout>
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );
