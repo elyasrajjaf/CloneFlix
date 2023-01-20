@@ -126,6 +126,7 @@ const MoviesProvider = ({ children }) => {
     // Collections
     const [swCollection, setSwCollection] = useState([]);
     const [stCollection, setStCollection] = useState([]);
+    const [jbCollection, setJbCollection] = useState([]);
 
     // Star Wars
     useEffect(() => {
@@ -151,7 +152,17 @@ const MoviesProvider = ({ children }) => {
         stCollectionAPI();
     }, []);
 
+    // James Bond
+    useEffect(() => {
+        const jbCollectionAPI = async () => {
+            const url = `https://api.themoviedb.org/3/collection/645?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US`;
 
+            const { data } = await axios(url);
+
+            setJbCollection(data.parts);
+        };
+        jbCollectionAPI();
+    }, []);
 
     return (
         <MoviesContext.Provider
@@ -166,6 +177,7 @@ const MoviesProvider = ({ children }) => {
                 rateSeries,
                 onTheAirSeries,
                 stCollection,
+                jbCollection
             }}
         >
             {children}

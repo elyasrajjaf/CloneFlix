@@ -6,7 +6,7 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useRef } from "react";
 
 const Collections = () => {
-    const { swCollection, stCollection } =
+    const { swCollection, stCollection, jbCollection } =
         useMovies();
 
     // Configuration du slider
@@ -40,7 +40,7 @@ const Collections = () => {
                 />
             </div>
 
-            <h1 className="text-white text-2xl pl-10 mb-4 py-5">Star Wars:</h1>
+            <h1 className="text-white text-2xl pl-10 mb-4 py-5">Star Trek:</h1>
             <div id="main-slider-container">
                 <MdChevronLeft
                     size={40}
@@ -58,6 +58,27 @@ const Collections = () => {
                     size={40}
                     className="slider-icon right"
                     onClick={() => slideRight(1)}
+                />
+            </div>
+
+            <h1 className="text-white text-2xl pl-10 mb-4 py-5">James Bond:</h1>
+            <div id="main-slider-container">
+                <MdChevronLeft
+                    size={40}
+                    className="slider-icon left"
+                    onClick={() => slideLeft(2)}
+                />
+                <div id="slider" ref={(el) => (slider.current[2] = el)}>
+                    {jbCollection.map((jbCollection) => (
+                        <div className="slider-card">
+                            <MovieCard key={jbCollection.id} movieTrend={jbCollection} />
+                        </div>
+                    ))}
+                </div>
+                <MdChevronRight
+                    size={40}
+                    className="slider-icon right"
+                    onClick={() => slideRight(2)}
                 />
             </div>
         </>
