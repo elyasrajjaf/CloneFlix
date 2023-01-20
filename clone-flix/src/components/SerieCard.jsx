@@ -24,12 +24,3 @@ export const SerieCard = ({ serieTrend }) => {
         </div>
     );
 };
-
-{
-    /* 
-  <div>
-    <div className="text-sm text-white">{release_date}</div>
-    <div className="text-sm text-white">{overview}</div>
-  </div>
-  */
-}

@@ -2,7 +2,7 @@ import React from "react";
 import useMovies from "../hooks/useMovies";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
-import { MovieCard } from "../components/MovieCard";
+import { SerieCard } from "../components/SerieCard";
 import "./Slider.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
@@ -34,7 +34,7 @@ const Series = (props) => {
                 <div id="slider">
                     {trendingSeries.map((serieTrend) => (
                         <div className="slider-card">
-                            <MovieCard key={serieTrend.id} movieTrend={serieTrend} />
+                            <SerieCard key={serieTrend.id} serieTrend={serieTrend} />
                         </div>
                     ))}
                 </div>

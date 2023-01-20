@@ -11,25 +11,25 @@ export const favorisReducer = (state = stateInit, action) => {
         case "ADD_FAVORITE_MOVIE":
             return {
                 ...state,
-                favorites: { ...favorites, movies: state.favorites.movies.concat(action.payload) },
+                favorites: { ...state.favorites, movies: state.favorites.movies.concat(action.payload) },
                 errorMsg: ""
             };
         case "REMOVE_FAVORITE_MOVIE":
             return {
                 ...state,
-                favorites: { ...favorites, movies: state.favorites.movies.filter((favorite) => favorite.id !== action.payload) },
+                favorites: { ...state.favorites, movies: state.favorites.movies.filter((favorite) => favorite.movie.id !== action.payload.movie.id) },
                 errorMsg: ""
             };
         case "ADD_FAVORITE_SERIE":
             return {
                 ...state,
-                favorites: { ...favorites, series: state.favorites.series.concat(action.payload) },
+                favorites: { ...state.favorites, series: state.favorites.series.concat(action.payload) },
                 errorMsg: ""
             };
         case "REMOVE_FAVORITE_SERIE":
             return {
                 ...state,
-                favorites: { ...favorites, series: state.favorites.series.filter((favorite) => favorite.id !== action.payload) },
+                favorites: { ...state.favorites, series: state.favorites.series.filter((favorite) => favorite.serie.id !== action.payload.serie.id) },
                 errorMsg: ""
             };
         case "ADD_FAVORITE_ERROR":

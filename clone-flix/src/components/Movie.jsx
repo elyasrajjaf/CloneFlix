@@ -16,9 +16,9 @@ const Movie = () => {
 
     const [movieIsFavorite, setMovieIsFavorite] = useState(false);
 
-    // const checkIfFavorite = (movieId) => {
-    //     favoris.some(movie => movie.id === movieId) ? setMovieIsFavorite(true) : setMovieIsFavorite(false);
-    // }
+    const checkIfFavoriteMovie = (movieId) => {
+        favorites.movies.some(movie => movie.movie.id === Number(movieId)) ? setMovieIsFavorite(true) : setMovieIsFavorite(false);
+    };
 
     useEffect(() => {
 
@@ -28,7 +28,7 @@ const Movie = () => {
             const { data } = await axios(url);
 
             setMovie(data);
-            // checkIfFavorite(movieId);
+            checkIfFavoriteMovie(movieId);
             setIsLoaded(true);
 
         };
@@ -36,6 +36,22 @@ const Movie = () => {
         getMovie(id);
 
     }, []);
+
+    useEffect(() => {
+
+        console.log(favorites);
+        checkIfFavoriteMovie(id);
+
+    }, [favorites]);
+
+    useEffect(() => {
+
+        movieIsFavorite ?
+            console.log("Le film est dans les favoris.")
+            :
+            console.log("Le film n'est pas dans les favoris.");
+
+    }, [movieIsFavorite]);
 
     // isLoaded -> wait for movie infos is favorite or not before render
 
@@ -47,15 +63,15 @@ const Movie = () => {
 
                 <div className="favorite-actions">
 
-                    {/* {movieIsFavorite ?
-                        <button onClick={() => dispatch(deleteFavorite({ movie }))}>
+                    {movieIsFavorite ?
+                        <button onClick={() => dispatch(deleteFavoriteMovie({ movie }))}>
                             Remove movie from favorites
                         </button>
                         :
-                        <button onClick={() => dispatch(addFavorite({ movie }))}>
+                        <button onClick={() => dispatch(addFavoriteMovie({ movie }))}>
                             Add movie to favorites
                         </button>
-                    } */}
+                    }
 
                 </div>
 
@@ -66,7 +82,12 @@ const Movie = () => {
                 </div>
 
                 <img
-                    src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.backdrop_path}`}
+                    src={
+                        movie.backdrop_path ?
+                            `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.backdrop_path}`
+                            :
+                            "https://i.pinimg.com/564x/45/17/26/451726bb0dda501f79d799b97d5308dc.jpg"
+                    }
                     alt={movie.original_title}
                 />
                 <p>

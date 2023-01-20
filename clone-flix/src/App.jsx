@@ -8,6 +8,7 @@ import Movie from "./components/Movie";
 import Serie from "./components/Serie";
 import Movies from "./pages/Movies";
 import Series from "./pages/Series";
+import Favoris from "./components/Favoris";
 
 const App = () => {
   return (
@@ -18,6 +19,8 @@ const App = () => {
         <Route index path="/Movies" element={<Movies />} />
         <Route index path="/serie/:id" element={<Serie />} />
         <Route index path="/Series" element={<Series />} />
+        <Route index path="/Favoris" element={<Favoris />} />
+        <Route index path="/Collections" element={<div></div>} />
       </Routes>
     </MoviesProvider>
   );
