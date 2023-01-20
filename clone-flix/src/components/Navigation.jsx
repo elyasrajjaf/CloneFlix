@@ -87,8 +87,8 @@ export const Navigation = () => {
                     <li
                     key={searchSuggestion.id}
                     className="flex flex-row items-center h-12 px-3 rounded-lg text-gray-600 bg-gray-300 my-2">
-                      <NavLink
-                        to={  
+                      <a
+                        href={  
                         searchSuggestion["media_type"] === "movie" ?
                         `/movie/${searchSuggestion.id}`
                         : 
@@ -111,7 +111,7 @@ export const Navigation = () => {
                           {searchSuggestion["first_air_date"] && searchSuggestion["first_air_date"]}
                         </span> */}
 
-                      </NavLink>
+                      </a>
                     </li>
                   )})}
                 </ul>

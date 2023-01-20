@@ -95,11 +95,23 @@ const Serie = () => {
             </span>
             {serie.overview}
           </p>
+          <p className="font-normal text-sm py-4 text-justify text-white">
+            <span className="font-medium text-gray-400 mb-1">
+              Genres:{" "}
+            </span>
+            {serie.genres.map((genre, i) => 
+                i !== serie.genres.length - 1 ?
+                <span key={genre.id}>{genre.name}{", "}</span>
+                :
+                <span key={genre.id}>{genre.name}</span> 
+            
+            )}
+          </p>
           <small className="font-normal text-sm py-4 text-justify text-white">
             <span className="font-medium text-gray-400 mb-1">
               Date de sortie:{" "}
             </span>
-            {serie.release_date}
+            {serie.release_date ? serie.release_date : serie.first_air_date}
           </small>
           <div className="py-5">
             {serieIsFavorite ? (
