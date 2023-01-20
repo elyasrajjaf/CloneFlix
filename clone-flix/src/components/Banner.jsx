@@ -23,7 +23,11 @@ const Banner = () => {
               <div
                 className="flex justify-center items-center bg-cover bg-no-repeat bg-center"
                 style={{
-                  backgroundImage: `url(https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.backdrop_path})`,
+                  backgroundImage: 
+                  movie.backdrop_path ?
+                  `url(https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.backdrop_path})`
+                  :
+                  "url(https://i.pinimg.com/564x/45/17/26/451726bb0dda501f79d799b97d5308dc.jpg)"
                 }}
               >
                 <div className="h-auto p-3 overflow-y-hidden flex-col justify-center items-center">
@@ -36,7 +40,12 @@ const Banner = () => {
                     <div className="flex justify-center items-center">
                       <img
                         className="w-1/2"
-                        src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.backdrop_path}`}
+                        src={
+                          movie.backdrop_path ?
+                          `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.backdrop_path}`
+                          :
+                          "https://i.pinimg.com/564x/45/17/26/451726bb0dda501f79d799b97d5308dc.jpg"
+                        }
                         alt="Image Banner"
                       />
                     </div>
