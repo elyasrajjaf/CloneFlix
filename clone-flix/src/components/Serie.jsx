@@ -79,7 +79,7 @@ const Serie = () => {
                     <img
                         src={
                             serie.backdrop_path
-                                ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.backdrop_path}`
+                                ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${serie.backdrop_path}`
                                 : "https://i.pinimg.com/564x/45/17/26/451726bb0dda501f79d799b97d5308dc.jpg"
                         }
                         alt={serie.original_title}
@@ -103,7 +103,7 @@ const Serie = () => {
                     </small>
                     <div className="py-5">
                         {serieIsFavorite ? (
-                            <button onClick={() => dispatch(deleteFavoriteSerie({ movie }))}>
+                            <button onClick={() => dispatch(deleteFavoriteSerie({ serie }))}>
                                 <div className="flex gap-2 justify-center items-center ">
                                     <div className=" text-red-600">
                                         <svg
@@ -121,7 +121,7 @@ const Serie = () => {
                                 </div>
                             </button>
                         ) : (
-                            <button onClick={() => dispatch(addFavoriteSerie({ movie }))}>
+                            <button onClick={() => dispatch(addFavoriteSerie({ serie }))}>
                                 <div className="flex gap-2 justify-center items-center hover:text-red-700 transition-all">
                                     <div className=" text-gray-600">
                                         <svg
