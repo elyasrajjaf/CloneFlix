@@ -16,6 +16,7 @@ const Serie = () => {
   const { id } = useParams();
   const [serie, setSerie] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
+  const [video, setVideo] = useState({});
 
   const [serieIsFavorite, setSerieIsFavorite] = useState(false);
 
@@ -38,6 +39,20 @@ const Serie = () => {
 
     getSerie(id);
   }, []);
+
+  // Récupération de la vidéo du film
+
+  useEffect(() => {
+    const getVideo = async (videoId) => {
+      const url = `https://api.themoviedb.org/3/tv/${videoId}/videos?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US`;
+      const { data } = await axios(url);
+
+      setVideo(data.results[7], videoId);
+
+    };
+    getVideo(id);
+  }, []);
+  console.log(video);
 
   useEffect(() => {
     checkIfFavoriteSerie(id);
@@ -89,6 +104,16 @@ const Serie = () => {
           <h2 className="text-5xl font-semibold text-red-700 py-4">
             {serie.title ? serie.title : serie.original_name}
           </h2>
+          <div className="w-1/3">
+            <span className="font-medium block mb-2 text-gray-400">
+              Bande annonce:{" "}
+            </span>
+            <iframe width="560" height="315" src={
+              video
+                ? `https://www.youtube.com/embed/${video.key}`
+                : "https://i.pinimg.com/564x/45/17/26/451726bb0dda501f79d799b97d5308dc.jpg"
+            } title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
           <p className="font-normal text-md py-4 text-justify text-white">
             <span className="font-medium block mb-2 text-gray-400">
               Description:{" "}

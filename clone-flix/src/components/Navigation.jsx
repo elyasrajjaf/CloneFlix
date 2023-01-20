@@ -4,13 +4,19 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 export const Navigation = () => {
+
+  const dispatch = useDispatch();
+  const { favorites } = useSelector((state) => state.favorisReducer);
+
   const [query, setQuery] = useState("");
   const [resultsSearch, setResultsSearch] = useState([]);
+  const [resultsSearchFiltered, setResultsSearchFiltered] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const searchMovies = async () => {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/search/company?api_key=a75e7e403b10ac94ebb9251b44696249&query=${query}&page=1`
+        `https://api.themoviedb.org/3/search/multi?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US&include_adult=false&query=${query}`
       );
       setResultsSearch(response.data.results);
     };
@@ -19,10 +25,19 @@ export const Navigation = () => {
     }
   }, [query]);
 
-  console.log(resultsSearch)
 
-  const dispatch = useDispatch();
-  const { favorites } = useSelector((state) => state.favorisReducer);
+  useEffect(() => {
+
+    if (resultsSearch.length > 0) {
+
+      let onlyMoviesAndSeries = resultsSearch.filter(e => e["media_type"] === "movie" || e["media_type"] === "tv").sort((a, b) => parseFloat(b.popularity) - parseFloat(a.popularity));
+
+      setResultsSearchFiltered([...onlyMoviesAndSeries]);
+
+    }
+
+  }, [resultsSearch]);
+
 
   return (
     <div className="w-full h-screen px-5 pb-20 bg-gray-800 sticky top-0">
@@ -53,18 +68,54 @@ export const Navigation = () => {
                   onChange={(e) => setQuery(e.target.value)}
                   className="p-2 bg-transparent"
                 />
-                {/* {console.log(resultsSearch.map((result) => result.name))} */}
               </div>
+              {/* 
+                  <ul>
+                    {resultsSearch.slice(0, 5).map((result) => (
+                      <li
+                        key={result.id}
+                        className="flex flex-row items-center h-12 px-3 rounded-lg text-gray-600 bg-gray-300 my-2"
+                      >
+                        <NavLink to={`/movie/${result.id}` || `/serie/${result.id}`}>{result.name}</NavLink>
+                      </li>
+                    ))}
+                  </ul> 
+                */}
               {query ? (
-                <ul>
-                  {resultsSearch.slice(0, 5).map((result) => (
-                    <li
-                      key={result.id}
-                      className="flex flex-row items-center h-12 px-3 rounded-lg text-gray-600 bg-gray-300 my-2"
-                    >
-                      <NavLink to={`/movie/${result.id}` || `/serie/${result.id}`}>{result.name}</NavLink>
-                    </li>
-                  ))}
+                <ul style={{ width: "15.8em" }}>
+                  {resultsSearchFiltered.slice(0, 5).map(searchSuggestion => {
+                    return (
+                      <li
+                        key={searchSuggestion.id}
+                        className="flex flex-row items-center h-12 px-3 rounded-lg text-gray-600 bg-gray-300 my-2">
+                        <a
+                          href={
+                            searchSuggestion["media_type"] === "movie" ?
+                              `/movie/${searchSuggestion.id}`
+                              :
+                              `/serie/${searchSuggestion.id}`}
+                        >
+
+                          {searchSuggestion["media_type"] === "movie" ?
+                            <span style={{ fontStyle: "italic" }}>Film - </span>
+                            :
+                            <span style={{ fontStyle: "italic" }}>Série - </span>
+                          }
+
+                          <span>
+                            {searchSuggestion.name ? searchSuggestion.name : searchSuggestion["original_title"]}
+                          </span>
+                          {/* <span>
+                          {searchSuggestion["release_date"] && searchSuggestion["release_date"]}
+                        </span>
+                        <span>
+                          {searchSuggestion["first_air_date"] && searchSuggestion["first_air_date"]}
+                        </span> */}
+
+                        </a>
+                      </li>
+                    );
+                  })}
                 </ul>
               ) : (
                 ""

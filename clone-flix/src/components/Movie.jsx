@@ -1,5 +1,5 @@
 import { NavLink, useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useInsertionEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addFavoriteMovie,
@@ -16,6 +16,7 @@ const Movie = () => {
 
   const [movie, setMovie] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
+  const [video, setVideo] = useState({});
 
   const [movieIsFavorite, setMovieIsFavorite] = useState(false);
 
@@ -34,9 +35,22 @@ const Movie = () => {
       checkIfFavoriteMovie(movieId);
       setIsLoaded(true);
     };
-
     getMovie(id);
   }, []);
+
+  // Récupération de la vidéo du film
+
+  useEffect(() => {
+    const getVideo = async (videoId) => {
+      const url = `https://api.themoviedb.org/3/movie/${videoId}/videos?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US`;
+      const { data } = await axios(url);
+
+      setVideo(data.results[7], videoId);
+
+    };
+    getVideo(id);
+  }, []);
+  console.log(video);
 
   useEffect(() => {
     console.log(favorites);
@@ -89,6 +103,16 @@ const Movie = () => {
           <h2 className="text-5xl font-semibold text-red-700 py-4">
             {movie.title ? movie.title : movie.original_title}
           </h2>
+          <div className="w-1/3">
+            <span className="font-medium block mb-2 text-gray-400">
+              Bande annonce:{" "}
+            </span>
+            <iframe width="560" height="315" src={
+              video
+                ? `https://www.youtube.com/embed/${video.key}`
+                : "https://i.pinimg.com/564x/45/17/26/451726bb0dda501f79d799b97d5308dc.jpg"
+            } title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
           <p className="font-normal text-md py-4 text-justify text-white">
             <span className="font-medium block mb-2 text-gray-400">
               Description:{" "}
