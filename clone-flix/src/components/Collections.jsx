@@ -6,7 +6,7 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useRef } from "react";
 
 const Collections = () => {
-    const { swCollection } =
+    const { swCollection, stCollection } =
         useMovies();
 
     // Configuration du slider
@@ -17,7 +17,6 @@ const Collections = () => {
     const slideRight = (index) => {
         slider.current[index].scrollLeft = slider.current[index].scrollLeft + 500;
     };
-
     return (
         <>
             <h1 className="text-white text-2xl pl-10 mb-4 py-5">Star Wars:</h1>
@@ -25,9 +24,9 @@ const Collections = () => {
                 <MdChevronLeft
                     size={40}
                     className="slider-icon left"
-                    onClick={slideLeft}
+                    onClick={() => slideLeft(0)}
                 />
-                <div id="slider">
+                <div id="slider" ref={(el) => (slider.current[0] = el)}>
                     {swCollection.map((swCollection) => (
                         <div className="slider-card">
                             <MovieCard key={swCollection.id} movieTrend={swCollection} />
@@ -37,7 +36,28 @@ const Collections = () => {
                 <MdChevronRight
                     size={40}
                     className="slider-icon right"
-                    onClick={slideRight}
+                    onClick={() => slideRight(0)}
+                />
+            </div>
+
+            <h1 className="text-white text-2xl pl-10 mb-4 py-5">Star Wars:</h1>
+            <div id="main-slider-container">
+                <MdChevronLeft
+                    size={40}
+                    className="slider-icon left"
+                    onClick={() => slideLeft(1)}
+                />
+                <div id="slider" ref={(el) => (slider.current[1] = el)}>
+                    {stCollection.map((stCollection) => (
+                        <div className="slider-card">
+                            <MovieCard key={stCollection.id} movieTrend={stCollection} />
+                        </div>
+                    ))}
+                </div>
+                <MdChevronRight
+                    size={40}
+                    className="slider-icon right"
+                    onClick={() => slideRight(1)}
                 />
             </div>
         </>

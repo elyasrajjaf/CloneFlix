@@ -125,6 +125,7 @@ const MoviesProvider = ({ children }) => {
 
     // Collections
     const [swCollection, setSwCollection] = useState([]);
+    const [stCollection, setStCollection] = useState([]);
 
     // Star Wars
     useEffect(() => {
@@ -138,6 +139,17 @@ const MoviesProvider = ({ children }) => {
         swCollectionAPI();
     }, []);
 
+    // Star Trek
+    useEffect(() => {
+        const stCollectionAPI = async () => {
+            const url = `https://api.themoviedb.org/3/collection/115575?api_key=a75e7e403b10ac94ebb9251b44696249&language=en-US`;
+
+            const { data } = await axios(url);
+
+            setStCollection(data.parts);
+        };
+        stCollectionAPI();
+    }, []);
 
 
 
@@ -152,7 +164,8 @@ const MoviesProvider = ({ children }) => {
                 upcomingMovies,
                 popularSeries,
                 rateSeries,
-                onTheAirSeries
+                onTheAirSeries,
+                stCollection,
             }}
         >
             {children}

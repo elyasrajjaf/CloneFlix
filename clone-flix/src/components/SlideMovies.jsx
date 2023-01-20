@@ -84,7 +84,7 @@ const SlideMovies = () => {
         />
       </div>
 
-      <h1 className="text-white text-2xl pl-10 mb-4 py-5">Collections:</h1>
+      <h1 className="text-white text-2xl pl-10 mb-4 py-5">Collections Star Wars</h1>
       <div id="main-slider-container">
         <MdChevronLeft
           size={40}
