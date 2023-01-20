@@ -21,7 +21,11 @@ const Favoris = () => {
                 <span className="text-red-700 font-medium">
                   {favorites.movies.length}
                 </span>{" "}
-                films favoris.
+                film
+                {favorites.movies.length > 1 && "s"}{" "}
+                favori
+                {favorites.movies.length > 1 && "s"}
+                .
               </p>
             </div>
             <div className="fav-movies flex flex-wrap">
@@ -50,7 +54,11 @@ const Favoris = () => {
                 <span className="text-red-700 font-medium">
                   {favorites.series.length}
                 </span>{" "}
-                séries favorites.
+                série
+                {favorites.series.length > 1 && "s"}{" "}
+                favorite
+                {favorites.series.length > 1 && "s"}
+                .
               </p>
             </div>
             <div className="fav-series flex flex-wrap">

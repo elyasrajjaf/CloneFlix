@@ -103,21 +103,33 @@ const Movie = () => {
           <h2 className="text-5xl font-semibold text-red-700 py-4">
             {movie.title ? movie.title : movie.original_title}
           </h2>
-          <div className="w-1/3">
-            <span className="font-medium block mb-2 text-gray-400">
-              Bande annonce:{" "}
-            </span>
-            <iframe width="560" height="315" src={
-              video
-                ? `https://www.youtube.com/embed/${video.key}`
-                : "https://i.pinimg.com/564x/45/17/26/451726bb0dda501f79d799b97d5308dc.jpg"
-            } title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
+          {video &&
+            <div className="w-1/3">
+              <span className="font-medium block mb-2 text-gray-400">
+                Bande annonce:{" "}
+              </span>
+              <iframe width="560" height="315" src={
+                video
+                  ? `https://www.youtube.com/embed/${video.key}`
+                  : "https://i.pinimg.com/564x/45/17/26/451726bb0dda501f79d799b97d5308dc.jpg"
+              } title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>}
           <p className="font-normal text-md py-4 text-justify text-white">
             <span className="font-medium block mb-2 text-gray-400">
               Description:{" "}
             </span>
             {movie.overview}
+          </p>
+          <p className="font-normal text-sm py-4 text-justify text-white">
+            <span className="font-medium text-gray-400 mb-1">
+              Genres:{" "}
+            </span>
+            {movie.genres.map((genre, i) =>
+              i !== movie.genres.length - 1 ?
+                <span key={genre.id}>{genre.name}{", "}</span>
+                :
+                <span key={genre.id}>{genre.name}</span>
+            )}
           </p>
           <small className="font-normal text-sm py-4 text-justify text-white">
             <span className="font-medium text-gray-400 mb-1">

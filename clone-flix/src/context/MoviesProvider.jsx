@@ -164,12 +164,51 @@ const MoviesProvider = ({ children }) => {
         jbCollectionAPI();
     }, []);
 
+    /////////////////////////////////////////////////////////////////////////////
+
+    // Genres
+
+    // Films
+    const [moviesGenres, setMoviesGenres] = useState([]);
+
+    useEffect(() => {
+        const genresAPI = async () => {
+            const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=a75e7e403b10ac94ebb9251b44696249`;
+
+            const { data } = await axios(url);
+
+            console.log("GENRES FILMS");
+            console.log(data.genres);
+            setMoviesGenres(data.genres);
+        };
+        genresAPI();
+    }, []);
+
+    
+    // Séries
+    const [seriesGenres, setSeriesGenres] = useState([]);
+
+    useEffect(() => {
+        const genresAPI = async () => {
+            const url = `https://api.themoviedb.org/3/genre/tv/list?api_key=a75e7e403b10ac94ebb9251b44696249`;
+
+            const { data } = await axios(url);
+
+            console.log("GENRES SERIES");
+            console.log(data.genres);
+            setSeriesGenres(data.genres);
+        };
+        genresAPI();
+    }, []);
+
     return (
         <MoviesContext.Provider
             value={{
                 trendingMovies,
                 trendingSeries,
                 popularMovies,
+                moviesGenres,
+                seriesGenres,
                 swCollection,
                 rateMovies,
                 upcomingMovies,

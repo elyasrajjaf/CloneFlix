@@ -25,7 +25,6 @@ export const Navigation = () => {
     }
   }, [query]);
 
-
   useEffect(() => {
 
     if (resultsSearch.length > 0) {
